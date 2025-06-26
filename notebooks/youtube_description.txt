@@ -1,0 +1,52 @@
+
+        Unlock the true power of AI directly from your terminal! In this in-depth video, we dive into a suite of game-changing command line tools like Simon Willison's LLM CLI, Olamma for local model running, dataset CLI for managing chat logs, embedding workflows, seamless piping tricks, Python and Jinja template automation, and even agentic terminal agents. You'll learn how to chat with large language models, process text and files, summarize docs, generate code, automate repetitive tasks, and streamline your workflow—all within your terminal. Perfect for developers, data scientists, and productivity hackers, this guide takes you beyond the GUI and puts AI at your fingertips. Watch and supercharge your command line with the latest and smartest AI integrations!.
+
+        📚 Chapters:
+00:00 - Introduction to Using AI in the Terminal
+1:02 - Setting Up LLMCLI by Simon Willison
+2:02 - Exploring Models and Configurations with LLMCLI
+3:04 - Running Local Models with Olamma
+4:02 - Managing Model Memory and Performance
+5:00 - Working with Local Databases Using Data Set CLI
+6:07 - Accessing and Filtering Interaction Logs
+7:04 - Utilizing Embeddings with LLMCLI
+8:01 - Creating Embeddings and Searching for Similarities
+10:01 - Converting Notes to Embeddings and Database Queries
+11:00 - Understanding Embedding Scores and Context
+11:28 - Generating Screenshots with Shot Scraper
+12:25 - Piping Data in the Terminal for Enhanced Productivity
+13:00 - Managing and Cleaning Terminal Output with Aliases
+14:06 - Using Bash and Python Scripts in Coordination with LLMs
+15:03 - Building Customized Aliases for LLM Interactions
+16:05 - Incorporating Piped Output into Advanced Scripts
+17:08 - Integration with Clipboard for Fast Workflow
+18:09 - Capture and Manipulate Output from LLMs
+19:00 - Chaining Prompts for Tiered Information Processing
+20:00 - Exploiting PDF to Text for Document Insights
+21:04 - Introduces git ingest and Reminders of Token Cost
+22:02 - Utilize r.jina.ai for Webpage to Markdown Conversion
+23:10 - Tools like Repo Mix and Files to Prompt for Efficient File Management
+24:09 - Agentic Use Cases with Autogen and Magenta CLI
+26:02 - Claude's Generative Capabilities in Project Building
+27:02 - Exploring Python Scripts with UV for Smooth Execution
+28:02 - Utilizing Inline Metadata for Efficient Packaging
+30:03 - Demonstrating UV-Run Python Scripts Step-by-Step
+31:00 - Setting Up Claude Projects for Script Creation
+32:00 - Using Jinja Templates for Customized Text Processing
+33:05 - Final Demonstrations with Mermaid, OCR, and Image Processing
+34:02 - Exploring Layered Control for AI-Driven Terminals
+35:23 - Closing Remarks and Future Considerations
+
+        🔗 Links:
+
+        - Subscribe!: https://www.youtube.com/channel/UCu8WF59Scx9f3H1N_FgZUwQ
+        - Tiktok: https://www.tiktok.com/@enkrateialucca?lang=en
+        - Twitter: https://twitter.com/LucasEnkrateia
+        - LinkedIn: https://www.linkedin.com/in/lucas-soares-969044167/
+        - AI project tracker from Ben's Bites: https://bensbites.beehiiv.com/subscribe?ref=CoXhc4I0c0
+
+        Support the Channel!
+
+        - Buy me a cup of coffee: https://tr.ee/7tYsD-tUu2
+        - Paypal: https://paypal.me/lucasenkrateia?country.x=PT&locale.x=pt_PT
+        
