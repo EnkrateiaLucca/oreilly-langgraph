@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <style>
+        /* --- Base --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 40px 30px;
+            color: #2c3e50;
+            line-height: 1.7;
+            background: #fff;
+        }
+
+        /* --- Header --- */
+        header {
+            border-bottom: 3px solid #2c3e50;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+        header h1 {
+            font-size: 2.2em;
+            color: #2c3e50;
+            line-height: 1.2;
+            margin-bottom: 8px;
+        }
+        .meta {
+            color: #7f8c8d;
+            font-size: 0.95em;
+            font-style: italic;
+        }
+
+        /* --- Sections --- */
+        .section {
+            margin-bottom: 45px;
+            page-break-inside: avoid;
+        }
+        h2 {
+            font-size: 1.5em;
+            color: #2c3e50;
+            border-left: 4px solid #3498db;
+            padding-left: 14px;
+            margin-bottom: 16px;
+            margin-top: 35px;
+        }
+        h3 {
+            font-size: 1.15em;
+            color: #34495e;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        p { margin-bottom: 12px; }
+        ul, ol { margin: 10px 0 15px 25px; }
+        li { margin-bottom: 5px; }
+        strong { color: #2c3e50; }
+        a { color: #3498db; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* --- Key Findings --- */
+        .findings {
+            background: #f0f7ff;
+            border: 1px solid #d4e6f9;
+            border-radius: 8px;
+            padding: 20px 25px;
+            margin: 25px 0;
+        }
+        .findings h3 {
+            color: #2c3e50;
+            margin-top: 0;
+            margin-bottom: 12px;
+        }
+        .findings ul { list-style: none; margin: 0; padding: 0; }
+        .findings li {
+            padding: 6px 0;
+            border-bottom: 1px solid #e8f0f8;
+        }
+        .findings li:last-child { border-bottom: none; }
+        .findings li::before { content: "→ "; color: #3498db; font-weight: bold; }
+
+        /* --- Tables --- */
+        .table-container { overflow-x: auto; margin: 20px 0; }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 0.9em;
+        }
+        th {
+            background-color: #2c3e50;
+            color: white;
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 600;
+        }
+        td {
+            padding: 10px 16px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        tr:nth-child(even) { background-color: #f8f9fa; }
+        tr:hover { background-color: #edf2f7; }
+
+        /* --- Charts --- */
+        .chart-container {
+            text-align: center;
+            margin: 25px 0;
+            page-break-inside: avoid;
+        }
+        .chart-img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .caption {
+            color: #7f8c8d;
+            font-size: 0.88em;
+            font-style: italic;
+            margin-top: 8px;
+        }
+
+        /* --- Screenshots --- */
+        .screenshot-container {
+            margin: 25px 0;
+            page-break-inside: avoid;
+        }
+        .screenshot-img {
+            max-width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        .screenshot-url {
+            font-family: monospace;
+            font-size: 0.82em;
+            color: #95a5a6;
+        }
+
+        /* --- Sources --- */
+        .sources ul { list-style: none; padding: 0; }
+        .sources li {
+            padding: 6px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.92em;
+        }
+        .sources li:last-child { border-bottom: none; }
+
+        /* --- Footer --- */
+        footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            color: #95a5a6;
+            font-size: 0.85em;
+            text-align: center;
+        }
+
+        /* --- Print / PDF --- */
+        @page {
+            margin: 2cm;
+            @bottom-center {
+                content: counter(page);
+                font-size: 9pt;
+                color: #95a5a6;
+            }
+        }
+        .page-break { page-break-before: always; }
+
+        /* Content section (rendered markdown) */
+        .content p { margin-bottom: 10px; }
+        .content ul { margin: 8px 0 12px 20px; }
+    </style>
+</head>
+<body>
+
+    <!-- ============ HEADER ============ -->
+    <header>
+        <h1>{{ title }}</h1>
+        <p class="meta">
+            Research report on <strong>{{ topic }}</strong>
+            &nbsp;·&nbsp; Generated {{ generated_date }}
+        </p>
+    </header>
+
+    <!-- ============ EXECUTIVE SUMMARY ============ -->
+    {% if executive_summary %}
+    <div class="section">
+        <h2>Executive Summary</h2>
+        <div class="content">{{ executive_summary | safe }}</div>
+    </div>
+    {% endif %}
+
+    <!-- ============ KEY FINDINGS ============ -->
+    {% if key_findings %}
+    <div class="findings">
+        <h3>Key Findings</h3>
+        <ul>
+            {% for finding in key_findings %}
+            <li>{{ finding }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <!-- ============ SUMMARY TABLE ============ -->
+    {% if summary_table %}
+    <div class="section">
+        <h2>Summary Data</h2>
+        <div class="table-container">
+            {{ summary_table | safe }}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- ============ CONTENT SECTIONS ============ -->
+    {% for section in sections %}
+    {% if section.title != "Executive Summary" %}
+    <div class="section">
+        <h2>{{ section.title }}</h2>
+        <div class="content">{{ section.content | safe }}</div>
+
+        {% for chart in section.charts %}
+        <div class="chart-container">
+            <img class="chart-img"
+                 src="data:image/png;base64,{{ chart.base64_png }}"
+                 alt="{{ chart.title }}">
+            <p class="caption">{{ chart.description }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endfor %}
+
+    <!-- ============ SCREENSHOTS ============ -->
+    {% if screenshots %}
+    <div class="section page-break">
+        <h2>Referenced Pages</h2>
+        {% for ss in screenshots %}
+        <div class="screenshot-container">
+            <h3>{{ ss.caption }}</h3>
+            <img class="screenshot-img"
+                 src="data:image/png;base64,{{ ss.base64_png }}"
+                 alt="{{ ss.caption }}">
+            <p class="screenshot-url">{{ ss.url }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- ============ SOURCES ============ -->
+    {% if sources %}
+    <div class="section sources">
+        <h2>Sources</h2>
+        <ul>
+            {% for source in sources %}
+            <li><a href="{{ source.url }}" target="_blank">{{ source.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <!-- ============ FOOTER ============ -->
+    <footer>
+        Generated by LangGraph Research Report Agent &nbsp;·&nbsp; {{ generated_date }}
+    </footer>
+
+</body>
+</html>

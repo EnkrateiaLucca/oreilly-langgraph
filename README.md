@@ -44,6 +44,7 @@ python -m ipykernel install --user --name=oreilly-langgraph
 | 1 | [LangGraph Fundamentals](notebooks/1.0-langgraph-fundamentals.ipynb) | States, nodes, edges, conditional routing, messages & reducers, LLM patterns (chaining, parallel, routing), tool integration |
 | 2 | [ReAct Agent with Memory](notebooks/2.0-react-agent-with-memory.ipynb) | Web search agent, ToolNode, tools_condition, MemorySaver, thread-based persistence |
 | 3 | [RAG Agent](notebooks/3.0-rag-agent.ipynb) | Document retrieval, Chroma vectorstore, question routing, document grading, web search fallback, local model option (gemma4) |
+| 4 | [Research Report Agent](notebooks/4.0-research-report-agent.ipynb) | Multi-node graph, parallel fan-out, conditional loops, structured output, Pydantic state, chart generation, Playwright screenshots, HTML report compilation |
 
 ## Guides
 
@@ -61,6 +62,8 @@ python -m ipykernel install --user --name=oreilly-langgraph
 │   ├── extra-notebooks/           # Supplementary notebooks and demos
 │   └── langgraph-studio/          # Example project for Studio
 ├── scripts/                       # Standalone Python scripts
+│   └── research_report/           # Multi-node research report pipeline (notebook 4.0)
+├── output/                        # Generated reports (HTML/PDF)
 ├── presentation/                  # Slide deck
 └── requirements/                  # Dependencies
 ```
@@ -69,4 +72,5 @@ python -m ipykernel install --user --name=oreilly-langgraph
 
 - `notebooks/extra-notebooks/` — Additional notebooks including advanced RAG with hallucination grading, agents from scratch, live demo examples
 - `scripts/` — Standalone Python scripts (agentic RAG, YouTube workflow, bulk task agent)
+- `scripts/research_report/` — Full multi-node research report pipeline with 7 nodes, Pydantic models, chart generation, and HTML compilation. Run with: `python -m scripts.research_report.research_report_graph "Your Topic"`
 - `notebooks/assets-resources/` — Architecture diagrams and reference documents
