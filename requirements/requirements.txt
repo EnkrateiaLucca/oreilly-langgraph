@@ -6,16 +6,17 @@ aiohttp==3.14.1
     # via
     #   langchain-community
     #   langchain-tavily
-aiosignal==1.3.1
+aiosignal==1.4.0
     # via aiohttp
 annotated-types==0.7.0
     # via pydantic
-anthropic==0.39.0
+anthropic==0.117.1
     # via langchain-anthropic
 anyio==4.6.2.post1
     # via
     #   anthropic
     #   httpx
+    #   langsmith
     #   openai
     #   starlette
     #   watchfiles
@@ -65,14 +66,10 @@ contourpy==1.3.0
     # via matplotlib
 cycler==0.12.1
     # via matplotlib
-dataclasses-json==0.6.7
-    # via langchain-community
 debugpy==1.8.2
     # via ipykernel
 decorator==5.1.1
     # via ipython
-defusedxml==0.7.1
-    # via langchain-anthropic
 deprecated==1.2.14
     # via
     #   opentelemetry-api
@@ -81,7 +78,10 @@ deprecated==1.2.14
 distro==1.9.0
     # via
     #   anthropic
+    #   langsmith
     #   openai
+docstring-parser==0.18.0
+    # via anthropic
 durationpy==0.9
     # via kubernetes
 executing==2.0.1
@@ -106,6 +106,8 @@ googleapis-common-protos==1.65.0
     # via opentelemetry-exporter-otlp-proto-grpc
 gpt4all==2.8.2
     # via nomic
+greenlet==3.5.3
+    # via playwright
 grpcio==1.67.1
     # via
     #   chromadb
@@ -114,7 +116,7 @@ h11==0.16.0
     # via
     #   httpcore
     #   uvicorn
-httpcore==1.0.6
+httpcore==1.0.9
     # via httpx
 httptools==0.6.4
     # via uvicorn
@@ -149,7 +151,9 @@ ipython==8.26.0
     # via ipykernel
 jedi==0.19.1
     # via ipython
-jiter==0.7.0
+jinja2==3.1.6
+    # via -r ./requirements/requirements.in
+jiter==0.16.0
     # via
     #   anthropic
     #   openai
@@ -172,16 +176,18 @@ kubernetes==31.0.0
 langchain==1.3.9
     # via
     #   -r ./requirements/requirements.in
-    #   langchain-community
     #   langchain-tavily
 langchain-anthropic==1.4.6
     # via -r ./requirements/requirements.in
-langchain-community==0.3.27
+langchain-classic==1.0.8
+    # via langchain-community
+langchain-community==0.4.2
     # via -r ./requirements/requirements.in
-langchain-core==1.3.3
+langchain-core==1.5.0
     # via
     #   langchain
     #   langchain-anthropic
+    #   langchain-classic
     #   langchain-community
     #   langchain-nomic
     #   langchain-ollama
@@ -191,45 +197,54 @@ langchain-core==1.3.3
     #   langgraph
     #   langgraph-checkpoint
     #   langgraph-prebuilt
-langchain-nomic==0.1.4
+    #   langgraph-sdk
+langchain-nomic==0.0.1
     # via -r ./requirements/requirements.in
-langchain-ollama==0.2.0
+langchain-ollama==1.1.0
     # via -r ./requirements/requirements.in
 langchain-openai==1.1.14
     # via -r ./requirements/requirements.in
-langchain-tavily==0.2.4
+langchain-protocol==0.0.18
+    # via
+    #   langchain-core
+    #   langgraph-sdk
+langchain-tavily==0.2.18
     # via -r ./requirements/requirements.in
 langchain-text-splitters==1.1.2
     # via
     #   -r ./requirements/requirements.in
-    #   langchain
+    #   langchain-classic
 langchainhub==0.1.21
     # via -r ./requirements/requirements.in
-langgraph==1.0.10
-    # via -r ./requirements/requirements.in
-langgraph-checkpoint==4.0.0
+langgraph==1.2.9
+    # via
+    #   -r ./requirements/requirements.in
+    #   langchain
+langgraph-checkpoint==4.1.1
     # via
     #   langgraph
     #   langgraph-prebuilt
 langgraph-cli==0.1.54
     # via -r ./requirements/requirements.in
-langgraph-prebuilt==0.2.3
+langgraph-prebuilt==1.1.0
     # via langgraph
-langgraph-sdk==0.1.70
+langgraph-sdk==0.4.2
     # via langgraph
-langsmith==0.8.0
+langsmith==0.10.9
     # via
-    #   langchain
+    #   langchain-classic
     #   langchain-community
     #   langchain-core
 loguru==0.7.2
     # via nomic
 markdown-it-py==3.0.0
     # via rich
-marshmallow==3.26.2
-    # via dataclasses-json
+markupsafe==3.0.3
+    # via jinja2
 matplotlib==3.9.2
-    # via -r ./requirements/requirements.in
+    # via
+    #   -r ./requirements/requirements.in
+    #   seaborn
 matplotlib-inline==0.1.7
     # via
     #   ipykernel
@@ -246,12 +261,6 @@ multidict==6.1.0
     # via
     #   aiohttp
     #   yarl
-mypy==1.16.1
-    # via langchain-tavily
-mypy-extensions==1.0.0
-    # via
-    #   mypy
-    #   typing-inspect
 nest-asyncio==1.6.0
     # via ipykernel
 nomic==3.3.0
@@ -268,15 +277,16 @@ numpy==1.26.4
     #   nomic
     #   onnxruntime
     #   pandas
+    #   seaborn
 oauthlib==3.2.2
     # via
     #   kubernetes
     #   requests-oauthlib
-ollama==0.3.3
+ollama==0.6.2
     # via langchain-ollama
 onnxruntime==1.20.0
     # via chromadb
-openai==1.54.1
+openai==2.46.0
     # via langchain-openai
 opentelemetry-api==1.28.0
     # via
@@ -322,7 +332,7 @@ orjson==3.11.6
     #   chromadb
     #   langgraph-sdk
     #   langsmith
-ormsgpack==1.10.0
+ormsgpack==1.12.2
     # via langgraph-checkpoint
 overrides==7.7.0
     # via chromadb
@@ -333,25 +343,27 @@ packaging==24.1
     #   ipykernel
     #   langchain-core
     #   langchainhub
-    #   marshmallow
+    #   langsmith
     #   matplotlib
     #   onnxruntime
     #   opentelemetry-instrumentation
 pandas==2.2.3
-    # via nomic
+    # via
+    #   -r ./requirements/requirements.in
+    #   nomic
+    #   seaborn
 parso==0.8.4
     # via jedi
-pathspec==0.12.1
-    # via mypy
 pexpect==4.9.0
     # via ipython
-pillow==12.2.0
+pillow==12.3.0
     # via
-    #   langchain-nomic
     #   matplotlib
     #   nomic
 platformdirs==4.2.2
     # via jupyter-core
+playwright==1.61.0
+    # via -r ./requirements/requirements.in
 posthog==3.7.0
     # via chromadb
 prompt-toolkit==3.0.47
@@ -386,16 +398,20 @@ pydantic==2.9.2
     #   fastapi
     #   langchain
     #   langchain-anthropic
+    #   langchain-classic
     #   langchain-core
     #   langgraph
     #   langsmith
     #   nomic
+    #   ollama
     #   openai
     #   pydantic-settings
 pydantic-core==2.23.4
     # via pydantic
-pydantic-settings==2.6.1
+pydantic-settings==2.14.2
     # via langchain-community
+pyee==13.0.1
+    # via playwright
 pygments==2.20.0
     # via
     #   ipython
@@ -427,7 +443,7 @@ pyyaml==6.0.2
     #   chromadb
     #   huggingface-hub
     #   kubernetes
-    #   langchain
+    #   langchain-classic
     #   langchain-community
     #   langchain-core
     #   uvicorn
@@ -442,7 +458,7 @@ requests==2.33.0
     #   gpt4all
     #   huggingface-hub
     #   kubernetes
-    #   langchain
+    #   langchain-classic
     #   langchain-community
     #   langchain-tavily
     #   langchainhub
@@ -465,6 +481,8 @@ rich==13.9.4
     #   typer
 rsa==4.9
     # via google-auth
+seaborn==0.13.2
+    # via -r ./requirements/requirements.in
 serpapi==0.1.5
     # via -r ./requirements/requirements.in
 shellingham==1.5.4
@@ -480,16 +498,17 @@ sniffio==1.3.1
     #   anthropic
     #   anyio
     #   httpx
+    #   langsmith
     #   openai
-soupsieve==2.6
+soupsieve==2.9.1
     # via beautifulsoup4
 sqlalchemy==2.0.35
     # via
-    #   langchain
+    #   langchain-classic
     #   langchain-community
 stack-data==0.6.3
     # via ipython
-starlette==1.3.1
+starlette==0.41.3
     # via fastapi
 sympy==1.13.3
     # via onnxruntime
@@ -530,24 +549,28 @@ typer==0.12.5
     # via chromadb
 types-requests==2.32.0.20241016
     # via langchainhub
-typing-extensions==4.12.2
+typing-extensions==4.16.0
     # via
+    #   aiohttp
+    #   aiosignal
     #   anthropic
     #   chromadb
     #   fastapi
     #   huggingface-hub
     #   ipython
     #   langchain-core
-    #   mypy
+    #   langchain-protocol
+    #   langsmith
     #   openai
     #   opentelemetry-sdk
     #   pydantic
     #   pydantic-core
+    #   pyee
     #   sqlalchemy
     #   typer
-    #   typing-inspect
-typing-inspect==0.9.0
-    # via dataclasses-json
+    #   typing-inspection
+typing-inspection==0.4.2
+    # via pydantic-settings
 tzdata==2024.2
     # via pandas
 urllib3==2.7.0
@@ -555,6 +578,10 @@ urllib3==2.7.0
     #   kubernetes
     #   requests
     #   types-requests
+uuid-utils==0.17.0
+    # via
+    #   langchain-core
+    #   langsmith
 uvicorn==0.32.0
     # via chromadb
 uvloop==0.21.0
@@ -565,15 +592,22 @@ wcwidth==0.2.13
     # via prompt-toolkit
 websocket-client==1.8.0
     # via kubernetes
-websockets==13.1
-    # via uvicorn
+websockets==15.0.1
+    # via
+    #   langgraph-sdk
+    #   langsmith
+    #   uvicorn
 wrapt==1.16.0
     # via
     #   deprecated
     #   opentelemetry-instrumentation
 xxhash==3.5.0
-    # via langgraph
+    # via
+    #   langgraph
+    #   langsmith
 yarl==1.17.1
     # via aiohttp
 zipp==3.20.2
     # via importlib-metadata
+zstandard==0.25.0
+    # via langsmith
