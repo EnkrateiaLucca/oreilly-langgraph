@@ -17,7 +17,7 @@ It's deliberately written as **one file with an explicit `StateGraph`** (not `cr
 ```
 ┌─────────────────┐    ┌──────────────┐    ┌─────────────┐
 │  Gradio chat UI │───▶│ LangGraph    │───▶│ Anthropic   │
-│  (renders HTML) │    │ StateGraph   │    │ Claude 4.6  │
+│  (renders HTML) │    │ StateGraph   │    │ Claude Sonnet 5 │
 └─────────────────┘    └──────┬───────┘    └─────────────┘
                               │
                        ┌──────▼──────┐
@@ -106,7 +106,7 @@ lsof -ti:7860 | xargs kill
 1. **`What is LangGraph in one card?`**
    → Pure card, no search. Shows the simplest tool call.
 
-2. **`Search for the latest news on Claude 4.6 and summarize as a card`**
+2. **`Search for the latest news on Claude Sonnet 5 and summarize as a card`**
    → Chains `web_search` → `display_card`. Two trips through the agent loop.
 
 3. **`Plot a bar chart of the populations of the 5 largest EU countries`**

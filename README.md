@@ -74,3 +74,4 @@ python -m ipykernel install --user --name=oreilly-langgraph
 - `scripts/` — Standalone Python scripts (agentic RAG, YouTube workflow, bulk task agent)
 - `scripts/research_report/` — Full multi-node research report pipeline with 7 nodes, Pydantic models, chart generation, and HTML compilation. Run with: `python -m scripts.research_report.research_report_graph "Your Topic"`
 - `notebooks/assets-resources/` — Architecture diagrams and reference documents
+- `notebooks/live-quick-langgraph.ipynb` — Short, live-coded demo of an iterative generate → critique → approve loop, using structured output and a conditional edge back to a prior node
