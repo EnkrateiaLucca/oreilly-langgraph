@@ -164,3 +164,8 @@ cython_debug/
 # Generated reports
 output/*.html
 output/*.pdf
+
+# Course process artifacts (not student-facing content)
+Plans/
+research/
+walkthrough.md
