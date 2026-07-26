@@ -3,7 +3,7 @@ langgraph>=0.4.0
 langchain-tavily
 langchain-openai
 langchain-anthropic
-serpapi
+langchain-chroma
 python-dotenv
 tavily-python
 langchain-nomic

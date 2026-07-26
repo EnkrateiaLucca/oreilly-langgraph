@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started with LangGraph - Cheatsheet</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        @page {
+            size: A4;
+            margin: 15mm;
+            @top-left { content: none; }
+            @top-center { content: none; }
+            @top-right { content: none; }
+            @bottom-left { content: none; }
+            @bottom-center { content: none; }
+            @bottom-right { content: none; }
+        }
+
+        body {
+            font-family: 'IBM Plex Sans', 'Helvetica', 'Arial', sans-serif;
+            font-size: 9.5pt;
+            line-height: 1.5;
+            color: #2A2825;
+            background: #F5F3EB;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 15mm;
+        }
+
+        .page-header {
+            text-align: center;
+            padding-bottom: 10pt;
+            margin-bottom: 12pt;
+            border-bottom: 3px solid #000;
+        }
+
+        .page-header h1 {
+            font-size: 22pt;
+            font-weight: 700;
+            margin-bottom: 4pt;
+            text-transform: uppercase;
+            letter-spacing: 1.5pt;
+            color: #000;
+        }
+
+        .page-header .subtitle {
+            font-size: 11pt;
+            color: #5C5750;
+            margin-bottom: 4pt;
+        }
+
+        .page-header .meta {
+            font-size: 8pt;
+            color: #8A847A;
+        }
+
+        .section-title {
+            font-size: 12pt;
+            font-weight: 700;
+            margin: 8pt 0 6pt 0;
+            padding: 4pt 8pt;
+            background: #000;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.5pt;
+            break-after: avoid;
+        }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8pt; margin-bottom: 6pt; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6pt; margin-bottom: 10pt; }
+
+        .agent-card {
+            border: 2px solid #000;
+            padding: 8pt;
+            background: #fff;
+            break-inside: avoid;
+        }
+        .agent-card.coral { border-left: 5px solid #E86B5A; }
+        .agent-card.golden { border-left: 5px solid #F5C542; }
+        .agent-card.sage { border-left: 5px solid #7CB56B; }
+        .agent-card.sky { border-left: 5px solid #5B9BD5; }
+
+        .agent-card-title {
+            font-size: 11pt;
+            font-weight: 700;
+            margin-bottom: 5pt;
+            padding-bottom: 4pt;
+            border-bottom: 1px solid #DDD9D2;
+        }
+        .agent-card-content { font-size: 8.5pt; }
+        .agent-card ul { margin-left: 12pt; margin-top: 4pt; }
+        .agent-card li { margin-bottom: 2pt; }
+
+        .icon-box {
+            text-align: center;
+            border: 2px solid #000;
+            padding: 8pt 4pt;
+            background: #fff;
+            break-inside: avoid;
+        }
+        .icon-placeholder {
+            width: 32pt; height: 32pt; margin: 0 auto 4pt auto;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16pt; border-radius: 4pt;
+        }
+        .icon-placeholder.coral { background: #FBEAE7; color: #E86B5A; }
+        .icon-placeholder.golden { background: #FEF8E6; color: #D4A800; }
+        .icon-placeholder.sage { background: #EEF5EC; color: #7CB56B; }
+        .icon-placeholder.sky { background: #E8F1F9; color: #5B9BD5; }
+        .icon-label { font-weight: 600; font-size: 8pt; }
+        .icon-desc { font-size: 7pt; color: #5C5750; margin-top: 2pt; }
+
+        .code-card { border: 2px solid #000; background: #fff; padding: 0; break-inside: avoid; }
+        .code-card-header {
+            background: #000; color: #fff; padding: 4pt 8pt;
+            font-weight: 700; font-size: 9pt;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+        }
+        .code-card pre {
+            margin: 0; padding: 6pt 8pt;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-size: 7.5pt; line-height: 1.35; background: #F5F4F1;
+            overflow: hidden; white-space: pre-wrap; word-break: break-all; overflow-wrap: break-word;
+        }
+
+        .info-box { border: 2px solid #000; padding: 6pt 8pt; margin: 6pt 0; background: #fff; break-inside: avoid; }
+        .info-box.tip { border-left: 4px solid #5B9BD5; background: #E8F1F9; }
+        .info-box.caution { border-left: 4px solid #F5C542; background: #FEF8E6; }
+        .info-box-title { font-weight: 700; font-size: 9pt; margin-bottom: 3pt; }
+        .info-box p { font-size: 8pt; margin: 0; }
+
+        .use-case {
+            display: inline-block; font-size: 7pt; padding: 2pt 5pt;
+            margin: 2pt 2pt 2pt 0; border-radius: 2pt; font-weight: 600;
+        }
+        .use-case.coral { background: #FBEAE7; color: #C05040; }
+        .use-case.golden { background: #FEF8E6; color: #9A7800; }
+        .use-case.sage { background: #EEF5EC; color: #5A8A50; }
+        .use-case.sky { background: #E8F1F9; color: #4080B0; }
+
+        .key-points { border: 2px solid #000; background: #fff; padding: 8pt; margin: 8pt 0; break-inside: avoid; }
+        .key-points-title { font-weight: 700; font-size: 10pt; margin-bottom: 6pt; text-transform: uppercase; }
+        .key-points ul { margin-left: 12pt; }
+        .key-points li { margin-bottom: 3pt; font-size: 8.5pt; }
+
+        .ref-table { width: 100%; border-collapse: collapse; font-size: 8pt; margin: 6pt 0; }
+        .ref-table th { background: #000; color: #fff; font-weight: 700; text-align: left; padding: 4pt 6pt; }
+        .ref-table td { padding: 4pt 6pt; border-bottom: 1px solid #DDD9D2; background: #fff; }
+        .ref-table code {
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-size: 7.5pt; background: #F5F4F1; padding: 1pt 3pt;
+        }
+
+        code {
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-size: 8pt; background: #F5F4F1; padding: 0 2pt;
+        }
+
+        footer {
+            margin-top: 12pt; padding-top: 8pt; border-top: 2px solid #000;
+            text-align: center; font-size: 7pt; color: #8A847A;
+        }
+        footer strong { color: #2A2825; }
+
+        @media print {
+            body { margin: 0; padding: 15mm; background: #F5F3EB; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .agent-card, .code-card, .info-box, .key-points, .icon-box { break-inside: avoid; }
+            .section-title { break-after: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-header">
+        <h1>Getting Started with LangGraph</h1>
+        <div class="subtitle">Stateful, Multi-Step AI Agents — Quick Reference</div>
+        <div class="meta">O'Reilly Live Training | Lucas Soares</div>
+    </div>
+
+    <div class="section-title">At a Glance: 4 Core Building Blocks</div>
+    <div class="grid-4">
+        <div class="icon-box">
+            <div class="icon-placeholder coral">&#9673;</div>
+            <div class="icon-label">State</div>
+            <div class="icon-desc">Shared data, a TypedDict</div>
+        </div>
+        <div class="icon-box">
+            <div class="icon-placeholder golden">&#9723;</div>
+            <div class="icon-label">Node</div>
+            <div class="icon-desc">Function: state &rarr; state</div>
+        </div>
+        <div class="icon-box">
+            <div class="icon-placeholder sage">&#8594;</div>
+            <div class="icon-label">Edge</div>
+            <div class="icon-desc">Fixed or conditional link</div>
+        </div>
+        <div class="icon-box">
+            <div class="icon-placeholder sky">&#9881;</div>
+            <div class="icon-label">Graph</div>
+            <div class="icon-desc">Compiled, runnable app</div>
+        </div>
+    </div>
+
+    <div class="section-title">1. Building Your First Graph</div>
+    <div class="grid-2">
+        <div class="agent-card coral">
+            <div class="agent-card-title">The Pattern</div>
+            <div class="agent-card-content">
+                <ul>
+                    <li>Define <code>State</code> as a <code>TypedDict</code> — the shared data every node reads and updates</li>
+                    <li>Write nodes as plain functions: take state in, return a partial update</li>
+                    <li><code>add_node</code> registers a node; <code>add_edge</code> wires fixed transitions</li>
+                    <li><code>START</code> / <code>END</code> are the graph's fixed entry/exit points</li>
+                    <li><code>compile()</code> turns the builder into a runnable app</li>
+                </ul>
+            </div>
+        </div>
+        <div class="code-card">
+            <div class="code-card-header">notebooks/1.0-langgraph-fundamentals.ipynb</div>
+            <pre>from langgraph.graph import StateGraph, START, END
+from typing_extensions import TypedDict
+
+class State(TypedDict):
+    graph_state: str
+
+def node1(state):
+    state["graph_state"] = "node 1"
+    return state
+
+builder = StateGraph(State)
+builder.add_node("node1", node1)
+builder.add_edge(START, "node1")
+builder.add_edge("node1", END)
+app = builder.compile()
+
+app.invoke({"graph_state": ""})</pre>
+        </div>
+    </div>
+
+    <div class="section-title">2. State &amp; Reducers — the Classic Footgun</div>
+    <div class="grid-2">
+        <div class="agent-card golden">
+            <div class="agent-card-title">Override vs. Accumulate</div>
+            <div class="agent-card-content">
+                <ul>
+                    <li>A plain <code>list</code> field is <strong>overridden</strong> on every node update — later writes silently erase earlier ones</li>
+                    <li><code>Annotated[list, add_messages]</code> makes the field <strong>accumulate</strong> instead</li>
+                    <li><code>MessagesState</code> is a ready-made state with <code>messages</code> already wired to <code>add_messages</code></li>
+                    <li>Two nodes in the same parallel step re-emitting the <em>same</em> unchanged field can still trigger an <code>InvalidUpdateError</code> — give every field a reducer</li>
+                </ul>
+                <div style="margin-top: 6pt;">
+                    <span class="use-case golden">Chat History</span>
+                    <span class="use-case golden">Parallel Fan-Out</span>
+                </div>
+            </div>
+        </div>
+        <div class="code-card">
+            <div class="code-card-header">Reducer Fix</div>
+            <pre>from typing import Annotated
+from langgraph.graph.message import add_messages
+
+class State(TypedDict):
+    # Annotated + add_messages => append,
+    # not overwrite, on every node return
+    messages: Annotated[list, add_messages]
+
+def my_node(state):
+    return {"messages": [HumanMessage("hi")]}</pre>
+        </div>
+    </div>
+
+    <div class="section-title">3. ReAct Agent: Tools + Conditional Routing</div>
+    <div class="grid-2">
+        <div class="agent-card sage">
+            <div class="agent-card-title">What It Does</div>
+            <div class="agent-card-content">
+                <ul>
+                    <li><code>llm.bind_tools(tools)</code> lets the model decide when to call a tool</li>
+                    <li><code>ToolNode([...])</code> executes whatever tool call the LLM emitted</li>
+                    <li><code>tools_condition</code> is a prebuilt conditional edge: routes to the tool node if a tool call is present, else to <code>END</code></li>
+                    <li>This loop (assistant &rarr; tools &rarr; assistant) is the core of nearly every agent</li>
+                </ul>
+                <div style="margin-top: 6pt;">
+                    <span class="use-case sage">Web Search</span>
+                    <span class="use-case sage">Function Calling</span>
+                </div>
+            </div>
+        </div>
+        <div class="code-card">
+            <div class="code-card-header">notebooks/2.0-react-agent-with-memory.ipynb</div>
+            <pre>from langgraph.graph import MessagesState, StateGraph, START
+from langgraph.prebuilt import tools_condition, ToolNode
+
+def assistant(state: MessagesState):
+    return {"messages": [llm_with_tools.invoke(state["messages"])]}
+
+builder = StateGraph(MessagesState)
+builder.add_node("assistant", assistant)
+builder.add_node("tools", ToolNode(tools))
+builder.add_edge(START, "assistant")
+builder.add_conditional_edges("assistant", tools_condition)
+builder.add_edge("tools", "assistant")</pre>
+        </div>
+    </div>
+
+    <div class="section-title">4. Memory: Checkpointers &amp; Threads</div>
+    <div class="grid-2">
+        <div class="agent-card sky">
+            <div class="agent-card-title">What It Does</div>
+            <div class="agent-card-content">
+                <ul>
+                    <li>A checkpointer (e.g. <code>InMemorySaver</code>) persists graph state after every step</li>
+                    <li>Pass <code>checkpointer=memory</code> to <code>compile()</code> to turn it on</li>
+                    <li>Every call needs a <code>thread_id</code> in <code>config</code> — that's what isolates one conversation from another</li>
+                    <li>Same <code>thread_id</code> across calls &rarr; the graph resumes with full history</li>
+                </ul>
+                <div style="margin-top: 6pt;">
+                    <span class="use-case sky">Multi-Turn Chat</span>
+                    <span class="use-case sky">Session Isolation</span>
+                </div>
+            </div>
+        </div>
+        <div class="code-card">
+            <div class="code-card-header">Usage Example</div>
+            <pre>from langgraph.checkpoint.memory import InMemorySaver
+
+memory = InMemorySaver()
+graph = builder.compile(checkpointer=memory)
+
+config = {"configurable": {"thread_id": "1"}}
+graph.invoke({"messages": [("user", "hi")]}, config)
+
+# Same thread_id => remembers prior turns
+graph.invoke({"messages": [("user", "and then?")]}, config)</pre>
+        </div>
+    </div>
+
+    <div class="section-title">Course Notebooks</div>
+    <table class="ref-table">
+        <thead>
+            <tr><th>#</th><th>Notebook</th><th>Core Pattern</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>1.0</td><td>LangGraph Fundamentals</td><td>State, nodes, edges, conditional routing, reducers</td></tr>
+            <tr><td>2.0</td><td>ReAct Agent with Memory</td><td><code>tools_condition</code>, <code>ToolNode</code>, checkpointer, thread isolation</td></tr>
+            <tr><td>3.0</td><td>RAG Agent</td><td>Vectorstore retrieval, document grading, web-search fallback routing</td></tr>
+            <tr><td>4.0</td><td>Research Report Agent</td><td>Multi-node graph, parallel fan-out, conditional loops, structured output</td></tr>
+        </tbody>
+    </table>
+
+    <div class="section-title">Key API Reference</div>
+    <table class="ref-table">
+        <thead>
+            <tr><th>Call</th><th>What It Does</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>StateGraph(State)</code></td><td>Start a new graph builder typed on your state schema</td></tr>
+            <tr><td><code>add_node(name, fn)</code></td><td>Register a node function under a name</td></tr>
+            <tr><td><code>add_edge(a, b)</code></td><td>Fixed transition from node <code>a</code> to node <code>b</code></td></tr>
+            <tr><td><code>add_conditional_edges(n, fn)</code></td><td>Route dynamically from node <code>n</code> based on <code>fn(state)</code>'s return value</td></tr>
+            <tr><td><code>set_conditional_entry_point(fn)</code></td><td>Pick the graph's first node dynamically instead of a fixed <code>START</code> edge</td></tr>
+            <tr><td><code>compile(checkpointer=...)</code></td><td>Build the runnable graph, optionally with persistence</td></tr>
+            <tr><td><code>.invoke(state, config)</code></td><td>Run the graph to completion, return final state</td></tr>
+            <tr><td><code>.stream(state, config)</code></td><td>Run the graph, yielding state after each node/step</td></tr>
+        </tbody>
+    </table>
+
+    <div class="key-points">
+        <div class="key-points-title">Agentic Design Patterns (from the slide deck)</div>
+        <ul>
+            <li><strong>Plan &amp; Execute</strong> — a planner node lays out steps up front; executor nodes carry them out</li>
+            <li><strong>Supervisor</strong> — a router node delegates each turn to the right specialized sub-agent</li>
+            <li><strong>Multi-Agent</strong> — specialized agents collaborate, each owning part of the task</li>
+            <li><strong>Flow Engineering</strong> — explicit, code-defined control flow instead of leaving control fully to the LLM</li>
+        </ul>
+    </div>
+
+    <div class="grid-2">
+        <div class="info-box tip">
+            <div class="info-box-title">&#128161; Pro Tip</div>
+            <p>Give every state field a reducer (<code>add_messages</code> or your own) once more than one node can write to it — the default "last write wins" behavior is rarely what you want in a graph with branches.</p>
+        </div>
+        <div class="info-box caution">
+            <div class="info-box-title">&#9888; Model Gotcha</div>
+            <p>Tool-calling with a reasoning model may need an explicit setting to work reliably — e.g. this course pins <code>reasoning_effort="none"</code> when binding tools, since higher reasoning effort can suppress tool calls.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p><strong>O'REILLY LIVE TRAINING</strong> | Getting Started with LangGraph | Lucas Soares</p>
+        <p>docs.langchain.com/oss/python/langgraph | github.com/langchain-ai/langgraph</p>
+    </footer>
+
+</body>
+</html>
