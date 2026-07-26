@@ -24,7 +24,7 @@ notebook-setup:
 
 env-update:
 	$(CONDA_ACTIVATE) $(ENV_NAME) && \
-	uv pip compile ./requirements/requirements.in -o ./requirements/requirements.txt && \
+	uv pip compile ./requirements/requirements.in --override ./requirements/overrides.txt -o ./requirements/requirements.txt && \
 	uv pip sync ./requirements/requirements.txt
 
 clean:

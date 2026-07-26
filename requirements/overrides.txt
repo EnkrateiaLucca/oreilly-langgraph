@@ -1,0 +1,5 @@
+# uv resolution overrides (applied via `uv pip compile --override`).
+# langchain-nomic 1.x pins pillow<12, but every open pillow CVE is fixed in 12.3.0.
+# The course only uses nomic for text embeddings, which never touch pillow, so
+# overriding the cap is safe. Drop this once langchain-nomic allows pillow>=12.
+pillow>=12.3.0
