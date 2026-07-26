@@ -164,8 +164,19 @@ cython_debug/
 # Generated reports
 output/*.html
 output/*.pdf
+notebooks/output/
 
 # Course process artifacts (not student-facing content)
 Plans/
 research/
 walkthrough.md
+
+# Runtime artifacts written by notebooks/0.0-intro-llm-agents-from-scratch.ipynb
+notebooks/lucas-test-local-agent/
+notebooks/lucas-tests-tool-calling/
+notebooks/testing-multiple-calls/
+notebooks/test-agent.txt
+notebooks/lucas-loves-pancakes.md
+notebooks/pancakes-are-better-than-waffles/
+notebooks/funny-pancakes-recipes/
+notebooks/pancakes-philosophy.txt
